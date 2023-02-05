@@ -1,6 +1,11 @@
 package com.thomas.data.models
 
+
+import com.google.gson.annotations.SerializedName
+
 data class Image(
-    val medium: String,
-    val original: String
+    @SerializedName("medium")
+    val medium: String?,
+    @SerializedName("original")
+    val original: String?
 )

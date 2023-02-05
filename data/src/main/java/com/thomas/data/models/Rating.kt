@@ -1,5 +1,9 @@
 package com.thomas.data.models
 
+
+import com.google.gson.annotations.SerializedName
+
 data class Rating(
-    val average: Double
+    @SerializedName("average")
+    val average: Double?
 )

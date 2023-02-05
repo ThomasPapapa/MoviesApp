@@ -1,6 +1,9 @@
 package com.thomas.data.models
 
+
+import com.google.gson.annotations.SerializedName
+
 data class ShowsResponseItem(
-    val score: Double,
-    val show: Show
+    @SerializedName("score") val score: Double?,
+    @SerializedName("show") val show: Show?
 )

@@ -1,5 +1,9 @@
 package com.thomas.data.models
 
+
+import com.google.gson.annotations.SerializedName
+
 data class Previousepisode(
-    val href: String
+    @SerializedName("href")
+    val href: String?
 )
