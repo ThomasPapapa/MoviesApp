@@ -1,4 +1,4 @@
-package com.thomas.moviesapp.components.movielist
+package com.thomas.moviesapp.components.showslist
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

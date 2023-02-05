@@ -10,8 +10,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.thomas.moviesapp.components.moviedetails.ShowDetailsScreen
-import com.thomas.moviesapp.components.movielist.ShowsListScreen
+import com.thomas.moviesapp.components.showdetails.ShowDetailsScreen
+import com.thomas.moviesapp.components.showslist.ShowsListScreen
 
 @Composable
 fun MainNavController() {
