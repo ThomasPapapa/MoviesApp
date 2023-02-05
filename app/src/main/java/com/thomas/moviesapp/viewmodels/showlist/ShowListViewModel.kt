@@ -17,19 +17,25 @@ class ShowListViewModel(
 
     private fun getContext() = getApplication<Application>().applicationContext
     val shows = MutableLiveData<ShowsResponse>()
+    val refreshing = MutableLiveData(false)
 
     fun getShows(title: String) {
+
         viewModelScope.launch(Dispatchers.IO) {
+
+            refreshing.postValue(true)
             when (val response = showsDatasource.getShows(title)) {
                 is ResponseResult.Success -> {
                     response.data?.let {
                         shows.postValue(it)
-                        Log.d("ViewModel","Success")
+                        refreshing.postValue(false)
+                        Log.d("ViewModel", "Success")
                     }
                 }
                 is ResponseResult.Error -> {
+                    refreshing.postValue(false)
                     //error
-                    Log.d("ViewModel", "Error"  )
+                    Log.d("ViewModel", "Error")
                 }
 
             }
