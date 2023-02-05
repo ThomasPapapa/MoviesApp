@@ -1,7 +1,7 @@
 package com.thomas.data.repositories
 
 import com.thomas.data.common.ResponseResult
-import com.thomas.data.datasource.shows.ShowsDatasource
+import com.thomas.data.datasource.remote.ShowsDatasource
 import com.thomas.data.models.ShowsResponse
 
 class ShowsRepositoryImpl(private val showsDatasource: ShowsDatasource) : ShowsRepository {

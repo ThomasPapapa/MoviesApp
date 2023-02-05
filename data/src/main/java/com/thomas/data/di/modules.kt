@@ -1,8 +1,8 @@
 package com.thomas.data.di
 
 import com.thomas.data.client.APIClient
-import com.thomas.data.datasource.shows.ShowsDatasource
-import com.thomas.data.datasource.shows.ShowsDatasourceImpl
+import com.thomas.data.datasource.remote.ShowsDatasource
+import com.thomas.data.datasource.remote.ShowsDatasourceImpl
 import com.thomas.data.repositories.ShowsRepository
 import com.thomas.data.repositories.ShowsRepositoryImpl
 import com.thomas.data.services.TVMazeAPI
