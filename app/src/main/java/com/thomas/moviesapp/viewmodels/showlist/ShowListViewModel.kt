@@ -6,13 +6,13 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.thomas.data.common.ResponseResult
-import com.thomas.data.datasource.shows.ShowsDatasource
 import com.thomas.data.models.ShowsResponse
+import com.thomas.data.repositories.ShowsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ShowListViewModel(
-    private val showsDatasource: ShowsDatasource, applicationInstance: Application
+    private val showsRepository: ShowsRepository, applicationInstance: Application
 ) : AndroidViewModel(applicationInstance) {
 
     private fun getContext() = getApplication<Application>().applicationContext
@@ -24,7 +24,7 @@ class ShowListViewModel(
         viewModelScope.launch(Dispatchers.IO) {
 
             refreshing.postValue(true)
-            when (val response = showsDatasource.getShows(title)) {
+            when (val response = showsRepository.getShows(title)) {
                 is ResponseResult.Success -> {
                     response.data?.let {
                         shows.postValue(it)
