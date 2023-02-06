@@ -39,7 +39,6 @@ class ShowsRepositoryImpl(
                 Show(
                     id = show.id,
                     name = show.name,
-                    type = show.type,
                     language = show.language,
                     genres = show.genres ?: emptyList(),
                     runtime = show.runtime ?: 0,

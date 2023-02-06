@@ -8,8 +8,6 @@ data class Show(
     val id: Int?,
     @SerializedName("name")
     val name: String?,
-    @SerializedName("type")
-    val type: String?,
     @SerializedName("language")
     val language: String?,
     @SerializedName("genres")

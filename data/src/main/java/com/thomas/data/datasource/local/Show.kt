@@ -10,7 +10,6 @@ import androidx.room.TypeConverters
 data class Show(
     @PrimaryKey(autoGenerate = false) val id: Int? = null,
     val name: String? = null,
-    val type: String? = null,
     val language: String? = null,
     val genres: List<String>,
     val runtime: Int? = 0,

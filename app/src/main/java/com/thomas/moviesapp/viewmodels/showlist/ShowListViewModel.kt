@@ -76,7 +76,6 @@ class ShowListViewModel(
             show = com.thomas.data.models.Show(
                 id = this.id,
                 name = this.name,
-                type = this.type,
                 language = this.language,
                 genres = this.genres,
                 runtime = this.runtime,
