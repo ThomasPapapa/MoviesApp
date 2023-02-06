@@ -28,18 +28,17 @@ fun ShowsListScreen(navController: NavController) {
     val refreshing by viewModel.refreshing.observeAsState(false)
 
     LaunchedEffect(key1 = Unit) {
-        if (context.isInternetAvailable()) {
-            viewModel.getShows("Christmas")
-        } else {
-            viewModel.getShowsFromDB()
-        }
+//        if (context.isInternetAvailable()) {
+//            viewModel.getShows("Christmas")
+//        } else {
+//            viewModel.getShowsFromDB()
+//        }
+        viewModel.getShows("Christmas")
     }
 
     val refreshScope = rememberCoroutineScope()
     fun refresh() = refreshScope.launch {
-        if (context.isInternetAvailable()) {
             viewModel.getShows("Christmas")
-        }
     }
 
     val state = rememberPullRefreshState(refreshing, ::refresh)
