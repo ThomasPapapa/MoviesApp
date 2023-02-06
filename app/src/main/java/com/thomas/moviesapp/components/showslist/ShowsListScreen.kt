@@ -11,7 +11,9 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
+import com.thomas.moviesapp.isInternetAvailable
 import com.thomas.moviesapp.viewmodels.showlist.ShowListViewModel
 import kotlinx.coroutines.launch
 import org.koin.java.KoinJavaComponent
@@ -20,17 +22,24 @@ import org.koin.java.KoinJavaComponent
 @Composable
 fun ShowsListScreen(navController: NavController) {
 
+    val context = LocalContext.current
     val viewModel: ShowListViewModel = remember { KoinJavaComponent.getKoin().get() }
     val shows by viewModel.shows.observeAsState(arrayListOf())
     val refreshing by viewModel.refreshing.observeAsState(false)
 
     LaunchedEffect(key1 = Unit) {
-        viewModel.getShows("Friends")
+        if (context.isInternetAvailable()) {
+            viewModel.getShows("Christmas")
+        } else {
+            viewModel.getShowsFromDB()
+        }
     }
 
     val refreshScope = rememberCoroutineScope()
     fun refresh() = refreshScope.launch {
-        viewModel.getShows("Friends")
+        if (context.isInternetAvailable()) {
+            viewModel.getShows("Christmas")
+        }
     }
 
     val state = rememberPullRefreshState(refreshing, ::refresh)
@@ -41,7 +50,7 @@ fun ShowsListScreen(navController: NavController) {
             .fillMaxSize()
             .background(color = Color.Black.copy(0.85f))
     ) {
-        if (shows.isNotEmpty()) {
+        if (!shows.isNullOrEmpty()) {
             ShowsList(navController = navController, showsList = shows)
         }
 

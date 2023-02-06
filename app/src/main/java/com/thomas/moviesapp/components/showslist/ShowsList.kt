@@ -19,11 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.skydoves.landscapist.glide.GlideImage
 import com.thomas.data.models.ShowsResponseItem
-import com.thomas.moviesapp.navigation.Screens
+import com.thomas.moviesapp.removeHtmlTagsAndEntities
 
-fun removeHtmlTagsAndEntities(htmlText: String): String {
-    return htmlText.replace("<[^>]*>".toRegex(), "").replace("&[^;]+;".toRegex(), "")
-}
 
 @Composable
 fun ShowsList(
@@ -48,10 +45,24 @@ fun ShowItem(
         Modifier
             .padding(10.dp)
             .fillMaxSize()
-            .height((screenHeight / 2).dp)
+            .height((screenHeight / (1.4)).dp)
             .clip(RoundedCornerShape(12.dp))
             .clickable(onClick = {
-                navController.navigate(Screens.SHOW_DETAILS_SCREEN.navRoute)
+                try {
+                    navController.navigate(
+                        "show_details_screen?"
+                                + "showName=${show.show?.name ?: "-"}"
+                                + "&showLanguage=${show.show?.language ?: "-"}"
+                                + "&showGenres=${ show.show?.genres?.joinToString(", ") ?: "-"}"
+                                + "&showRuntime=${show.show?.runtime ?: 0}"
+                                + "&showImageOriginal=${show.show?.image?.original ?: "-"}"
+                                + "&showImageMedium=${show.show?.image?.medium ?: "-"}"
+                                + "&showRating=${show.show?.rating?.average ?: 0.0}"
+                                + "&showSummary=${show.show?.summary ?: 0.0}"
+                    )
+                } catch (t: Throwable) {
+                    t.printStackTrace()
+                }
             })
     ) {
         GlideImage(
@@ -69,8 +80,7 @@ fun ShowItem(
         ) {
             Spacer(modifier = Modifier.height(10.dp))
             Row(
-                Modifier
-                .padding(horizontal = 10.dp)
+                Modifier.padding(horizontal = 10.dp)
             ) {
                 Text(
                     text = show.show?.name ?: "", color = Color.White, modifier = Modifier
@@ -84,7 +94,7 @@ fun ShowItem(
             }
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = removeHtmlTagsAndEntities(show.show?.summary ?: ""),
+                text = (show.show?.summary ?: "").removeHtmlTagsAndEntities(),
                 color = Color.White,
                 maxLines = 3,
                 overflow = TextOverflow.Ellipsis,
