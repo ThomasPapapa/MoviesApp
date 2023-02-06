@@ -54,6 +54,7 @@ fun ShowDetailsScreen(
                 text = if (showRating == 0.0f) "" else showRating.toString() + "/10",
                 color = Color.White
             )
+            Spacer(modifier = Modifier.height(10.dp))
             Text(text = showSummary?.removeHtmlTagsAndEntities() ?: "", color = Color.White)
         }
     }
